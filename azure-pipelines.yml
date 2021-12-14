@@ -9,7 +9,7 @@ steps:
   displayName: 'Run a one-line script'
 - task: Docker@2
   inputs:
-    containerRegistry: 'Dockerhub_parshchakurkar'
+    containerRegistry: 'parshdockerhub'
     repository: 'parshchakurkar / azure_docker'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
