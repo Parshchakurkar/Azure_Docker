@@ -21,7 +21,7 @@ resource "azurerm_resource_group" "dockerresource" {
 }
 
 resource "azurerm_kubernetes_cluster" "dockercluster" {
-  name                = "docker_cluster"
+  name                = "${var.cluster}_${var.resource_group}_${var.env}"
   location            = azurerm_resource_group.dockerresource.location
   resource_group_name = azurerm_resource_group.dockerresource.name
   dns_prefix          = "cluster1"
@@ -52,5 +52,13 @@ resource "azurerm_kubernetes_cluster" "dockercluster" {
   service_principal {
     client_id     = var.client_id
     client_secret = var.client_secret
+  }
+
+
+}
+
+terraform {
+  backend "azrerm"{
+    
   }
 }
