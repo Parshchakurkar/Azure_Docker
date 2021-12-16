@@ -7,9 +7,29 @@ pool:
 steps:
 - script: echo Hello, Docker!
   displayName: 'Run a one-line script'
+
+- task: DownloadSecureFile@1
+  name: publickey
+  inputs:
+    secureFile: 'azure_rsa.pub'
+
 - task: Docker@2
   inputs:
     containerRegistry: 'parshdockerhub'
     repository: 'parshchakurkar / azure_docker'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'init'
+    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+    backendType: 'azurerm'
+    backendServiceArm: 'azure_service_resource_manager'
+    ensureBackend: true
+    backendAzureRmResourceGroupName: 'docker_azure_terraform_rg'
+    backendAzureRmResourceGroupLocation: 'West Europe'
+    backendAzureRmStorageAccountName: 'dockerstorageAzurestoragexr'
+    backendAzureRmContainerName: 'dockerstorageAzurestoragexrcontainer'
+    backendAzureRmKey: 'docker-practice.tfstate'
+    allowTelemetryCollection: true
