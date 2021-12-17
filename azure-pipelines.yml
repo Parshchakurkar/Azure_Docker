@@ -23,7 +23,7 @@ steps:
 - task: TerraformCLI@0
   inputs:
     command: 'init'
-    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+    #commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
     backendType: 'azurerm'
     backendServiceArm: 'azure_service_resource_manager'
     ensureBackend: true
@@ -33,3 +33,12 @@ steps:
     backendAzureRmContainerName: 'dockerstoragepraccontainer'
     backendAzureRmKey: 'docker-practice.tfstate'
     allowTelemetryCollection: true
+
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'apply'
+    environmentServiceName: 'azure_service_resource_manager'
+    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath) --auto-approve'
+    allowTelemetryCollection: true
+    
