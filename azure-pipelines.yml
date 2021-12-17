@@ -29,7 +29,7 @@ steps:
     ensureBackend: true
     backendAzureRmResourceGroupName: 'docker_azure_terraform_rg'
     backendAzureRmResourceGroupLocation: 'West Europe'
-    backendAzureRmStorageAccountName: 'dockerstorageAzurestoragexr'
-    backendAzureRmContainerName: 'dockerstorageAzurestoragexrcontainer'
+    backendAzureRmStorageAccountName: 'dockerstorageprac'
+    backendAzureRmContainerName: 'dockerstoragepraccontainer'
     backendAzureRmKey: 'docker-practice.tfstate'
     allowTelemetryCollection: true
