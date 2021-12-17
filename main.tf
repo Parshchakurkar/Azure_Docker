@@ -58,7 +58,7 @@ resource "azurerm_kubernetes_cluster" "dockercluster" {
 }
 
 terraform {
-  backend "azrerm"{
+  backend "azurerm"{
     
   }
 }
